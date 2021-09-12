@@ -47,5 +47,42 @@ module.exports = {
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
     }
+  },
+  viewEdit: async(req,res)=>{
+    try {
+      const {id} = req.params
+
+      const nominal = await Nominal.findOne({_id: id})
+
+      res.render('admin/nominal/edit',{
+        title: 'Edit Nominal',
+        nominal
+      })
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/nominal')
+    }
+  },
+  actionEdit: async(req,res)=>{
+    try {
+      const { id } = req.params;
+      const { coinName, coinQuantity, price } = req.body;
+
+      await Nominal.findOneAndUpdate({
+        _id: id
+      },{
+        coinName, coinQuantity, price
+      })
+
+      req.flash('alertMessage', 'Edit nominal successfully')
+      req.flash('alertStatus', 'success')
+
+      res.redirect('/nominal')
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/nominal')
+    }
   }
 }
