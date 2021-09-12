@@ -14,7 +14,7 @@
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
 						<li class="breadcrumb-item"><a href="/category">Category</a></li>
-						<li class="breadcrumb-item active">Create</li>
+						<li class="breadcrumb-item active">Edit</li>
 					</ol>
 				</div>
 			</div>
@@ -28,13 +28,13 @@
 				<div class="col-12">
 					<div class="card card-primary">
 						<div class="card-header">
-							<h3 class="card-title">Create Category</h3>
+							<h3 class="card-title">Edit Category &nbsp; "<%= category.name %>"</h3>
 						</div>
-						<form action="/category/create" method="POST">
+						<form action="/category/edit/<%= category._id %>?_method=PUT" method="POST">
 							<div class="card-body">
 								<div class="form-group">
 									<label for="name">Category Name</label>
-									<input type="text" class="form-control" id="name" name="name" placeholder="Enter category name..." required>
+									<input type="text" value="<%= category.name %>" class="form-control" id="name" name="name" placeholder="Enter category name..." required>
 								</div>
 							</div>
 							<div class="card-footer">
