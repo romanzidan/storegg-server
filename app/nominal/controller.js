@@ -84,5 +84,21 @@ module.exports = {
       req.flash('alertStatus', 'danger')
       res.redirect('/nominal')
     }
+  },
+  actionDelete: async(req,res)=>{
+    try {
+      const { id } = req.params;
+
+      await Nominal.findOneAndDelete({_id:id})
+
+      req.flash('alertMessage', 'Delete nominal successfully')
+      req.flash('alertStatus', 'success')
+
+      res.redirect('/nominal')
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/nominal')
+    }
   }
 }
