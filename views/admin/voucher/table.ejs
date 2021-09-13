@@ -49,11 +49,11 @@
             </button>
           <% } %>
         </form>
-        <a href="/nominal/edit/<%= voucher[i]._id %>" class="btn btn-info">
+        <a href="/voucher/edit/<%= voucher[i]._id %>" class="btn btn-info">
           <i class="nav-icon fas fa-pencil-alt"></i>
           Edit
         </a>
-        <form action="/nominal/delete/<%= voucher[i]._id %>?_method=DELETE" method="POST" class="d-inline-block">
+        <form action="/voucher/delete/<%= voucher[i]._id %>?_method=DELETE" method="POST" class="d-inline-block">
           <button class="btn btn-danger">
             <i class="nav-icon fas fa-trash-alt"></i>
             Delete

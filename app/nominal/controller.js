@@ -89,7 +89,7 @@ module.exports = {
     try {
       const { id } = req.params;
 
-      await Nominal.findOneAndDelete({_id:id})
+      await Nominal.findOneAndRemove({_id:id})
 
       req.flash('alertMessage', 'Delete nominal successfully')
       req.flash('alertStatus', 'success')
