@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const {
-  index, viewCreate, actionCreate, viewEdit, actionEdit, actionDelete
+  index, viewCreate, actionCreate, viewEdit, actionEdit, actionDelete, actionStatus
 } = require('./controller')
 
 router.get('/', index)
@@ -10,5 +10,6 @@ router.post('/create', actionCreate)
 router.get('/edit/:id', viewEdit)
 router.put('/edit/:id', actionEdit)
 router.delete('/delete/:id', actionDelete)
+router.put('/status/:id', actionStatus)
 
 module.exports = router;
