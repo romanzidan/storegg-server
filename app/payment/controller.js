@@ -86,7 +86,23 @@ module.exports = {
       req.flash('alertStatus', 'success')
 
       res.redirect('/payment')
-    } catch (error) {
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/payment')
+    }
+  },
+  actionDelete: async(req,res)=>{
+    try {
+      const { id } = req.params
+
+      await Payment.findOneAndRemove({_id: id})
+
+      req.flash('alertMessage', 'Delete Payment successfully')
+      req.flash('alertStatus', 'success')
+
+      res.redirect('/payment')
+    } catch (err) {
       req.flash('alertMessage', `${err.message}`)
       req.flash('alertStatus', 'danger')
       res.redirect('/payment')
