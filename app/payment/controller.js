@@ -54,5 +54,42 @@ module.exports = {
       req.flash('alertStatus', 'danger')
       res.redirect('/payment')
     }
+  },
+  viewEdit: async(req,res)=>{
+    try {
+      const {id} = req.params
+      
+      const payment = await Payment.findOne({_id: id}).populate('banks')
+      const banks = await Bank.find();
+
+      res.render('admin/payment/edit',{
+        title: 'Edit Payment',
+        banks,
+        payment
+      })
+    } catch (err) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/payment')
+    }
+  },
+  actionEdit: async(req,res)=>{
+    try {
+      const { id } = req.params
+      const { type, banks } = req.body
+
+      await Payment.findOneAndUpdate({_id: id},{
+        type, banks
+      })
+
+      req.flash('alertMessage', 'Update Payment successfully')
+      req.flash('alertStatus', 'success')
+
+      res.redirect('/payment')
+    } catch (error) {
+      req.flash('alertMessage', `${err.message}`)
+      req.flash('alertStatus', 'danger')
+      res.redirect('/payment')
+    }
   }
 }
