@@ -14,7 +14,7 @@
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
 						<li class="breadcrumb-item"><a href="/bank">Bank</a></li>
-						<li class="breadcrumb-item active">Create</li>
+						<li class="breadcrumb-item active">Edi</li>
 					</ol>
 				</div>
 			</div>
@@ -28,32 +28,31 @@
 				<div class="col-12">
 					<div class="card card-primary">
 						<div class="card-header">
-							<h3 class="card-title">Create Bank</h3>
+							<h3 class="card-title">Edit Bank</h3>
 						</div>
-						<form action="/bank/create" method="POST">
+						<form action="/bank/edit/<%= bank._id %>?_method=PUT" method="POST">
 							<div class="card-body">
                 <div class="form-group">
 									<label for="name">Account Name</label>
-									<input type="text" class="form-control" id="name" name="name" placeholder="Enter account name..." required>
+									<input type="text" value="<%= bank.name %>" class="form-control" id="name" name="name" placeholder="Enter account name..." required>
 								</div>
 								<div class="form-group">
                   <label>Bank</label>
                   <select class="form-control select2" style="width: 100%;" name="nameBank">
-                    <option selected="selected" disabled>Select Bank</option>
-                    <option value="BRI">BRI</option>
-                    <option value="Mandiri">Mandiri</option>
-                    <option value="BCA">BCA</option>
-                    <option value="BNI">BNI</option>
-                    <option value="BTN">BTN</option>
-                    <option value="Danamon">Danamon</option>
-                    <option value="Permata">Permata</option>
-                    <option value="CIMB Niaga">CIMB NIAGA</option>
-                    <option value="MUAMALAT">MUAMALAT</option>
+                    <option value="BRI" <%if(bank.nameBank === 'BRI'){%> selected <%}%> >BRI</option>
+                    <option value="Mandiri" <%if(bank.nameBank === 'Mandiri'){%> selected <%}%>>Mandiri</option>
+                    <option value="BCA" <%if(bank.nameBank === 'BCA'){%> selected <%}%>>BCA</option>
+                    <option value="BNI" <%if(bank.nameBank === 'BNI'){%> selected <%}%>>BNI</option>
+                    <option value="BTN" <%if(bank.nameBank === 'BTN'){%> selected <%}%>>BTN</option>
+                    <option value="Danamon" <%if(bank.nameBank === 'Danamon'){%> selected <%}%>>Danamon</option>
+                    <option value="Permata" <%if(bank.nameBank === 'Permata'){%> selected <%}%>>Permata</option>
+                    <option value="CIMB Niaga" <%if(bank.nameBank === 'CIMB Niaga'){%> selected <%}%>>CIMB NIAGA</option>
+                    <option value="MUAMALAT" <%if(bank.nameBank === 'MUAMALAT'){%> selected <%}%>>MUAMALAT</option>
                   </select>
                 </div>
                 <div class="form-group">
 									<label for="noRekening">No Rekening</label>
-									<input type="number" class="form-control" id="noRekening" name="noRekening" placeholder="Enter no Rekening..." required>
+									<input type="number" value="<%= bank.noRekening %>" class="form-control" id="noRekening" name="noRekening" placeholder="Enter no Rekening..." required>
 								</div>
 							</div>
 							<div class="card-footer">
