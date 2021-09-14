@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const {
-  index
+  viewSignin, actionSignin
 } = require('./controller');
 
-router.get('/', index)
+router.get('/', viewSignin)
+router.post('/', actionSignin)
 
 module.exports = router;

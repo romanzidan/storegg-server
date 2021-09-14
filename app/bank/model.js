@@ -13,6 +13,6 @@ let bankSchema = mongoose.Schema({
     type: String,
     required: [true, 'No Rekening is required']
   }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model('Bank', bankSchema)
