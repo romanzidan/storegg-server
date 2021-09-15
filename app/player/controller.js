@@ -6,12 +6,31 @@ module.exports = {
     try {
       const voucher = await Voucher.find()
       .select('_id name status category thumbnail')
-      .populate({ path: 'category', select: '-_id name' })
+      .populate('category','-_id name')
 
       res.status(200).json({ data: voucher })
 
     } catch (err) {
       res.status(500).json({message: err.message || `Internal server error`})
     }
-  }
+  },
+  detailPage: async(req,res)=>{
+    try {
+      const { id } = req.params
+      const voucher = await Voucher.findOne({_id: id})
+      .select('_id name status category thumbnail')
+      .populate('nominals')
+      .populate('category')
+      .populate('user', '_id name phoneNumber')
+
+      if(!voucher){
+        return res.status(404).json({ message: 'Voucher game not found.!' })
+      }
+
+      res.status(200).json({ data: voucher })
+
+    } catch (err) {
+      res.status(500).json({message: err.message || `Internal server error`})
+    }
+  },
 }
