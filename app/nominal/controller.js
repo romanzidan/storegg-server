@@ -24,7 +24,8 @@ module.exports = {
   viewCreate: async(req,res)=>{
     try {
       res.render('admin/nominal/create',{
-        title: 'Create Nominal'
+        title: 'Create Nominal',
+        name: req.session.user.name
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -57,7 +58,8 @@ module.exports = {
 
       res.render('admin/nominal/edit',{
         title: 'Edit Nominal',
-        nominal
+        nominal,
+        name: req.session.user.name
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
