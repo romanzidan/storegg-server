@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-let userSchema = mongoose.Schema({
+let playerSchema = mongoose.Schema({
   email: {
     type: String,
     required: [true, 'Email is required']
@@ -19,7 +19,8 @@ let userSchema = mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Password is required']
+    required: [true, 'Password is required'],
+    maxlength :[225, "Password max length 225"],
   },
   role: {
     type: String,
@@ -33,8 +34,20 @@ let userSchema = mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: [true, 'Phone Number is Required']
+    required: [true, 'Phone Number is Required'],
+    maxlength :[13, "Phone Number max length 13"],
+    minlength :[9, "Phone Number min length 9"]
+  },
+  avatar: {
+    type: String
+  },
+  fileName: {
+    type: String
+  },
+  favorite: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
   }
 }, {timestamps: true})
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Player', playerSchema)
