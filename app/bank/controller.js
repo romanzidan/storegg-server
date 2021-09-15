@@ -12,7 +12,8 @@ module.exports = {
       res.render('admin/bank/view_bank',{
         title: 'Bank',
         alert,
-        bank
+        bank,
+        name: req.session.user.name
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -23,7 +24,8 @@ module.exports = {
   viewCreate: async(req,res)=>{
     try {
       res.render('admin/bank/create',{
-        title: 'Create Bank'
+        title: 'Create Bank',
+        name: req.session.user.name
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
@@ -36,7 +38,8 @@ module.exports = {
       const {name, nameBank, noRekening} = req.body
 
       let bank = await Bank({
-        name, nameBank, noRekening
+        name, nameBank, noRekening,
+        name: req.session.user.name
       })
       await bank.save();
 
@@ -58,7 +61,8 @@ module.exports = {
 
       res.render('admin/bank/edit',{
         title: 'Edit Bank',
-        bank
+        bank,
+        name: req.session.user.name
       })
     } catch (err) {
       req.flash('alertMessage', `${err.message}`)
