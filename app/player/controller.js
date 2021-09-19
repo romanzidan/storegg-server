@@ -34,7 +34,7 @@ module.exports = {
       .populate('category')
       .populate('user', '_id name phoneNumber');
 
-      const payment = await Payment.find({
+      const payments = await Payment.find({
         status: 'Y'
       });
 
@@ -45,7 +45,7 @@ module.exports = {
       res.status(200).json({ 
         data: {
           detail: voucher,
-          payment: payment
+          payments: payments
         }
       })
 
