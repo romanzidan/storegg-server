@@ -36,7 +36,7 @@ module.exports = {
 
       const payments = await Payment.find({
         status: 'Y'
-      });
+      }).populate('banks');
 
       if(!voucher){
         return res.status(404).json({ message: 'Voucher game not found.!' })
