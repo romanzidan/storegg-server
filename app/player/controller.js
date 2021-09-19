@@ -12,7 +12,9 @@ const config = require('../../config')
 module.exports = {
   landingPage: async(req,res)=>{
     try {
-      const voucher = await Voucher.find()
+      const voucher = await Voucher.find({
+        status: 'Y'
+      })
       .select('_id name status category thumbnail')
       .populate('category','-_id name')
 
@@ -22,6 +24,7 @@ module.exports = {
       res.status(500).json({message: err.message || `Internal server error`})
     }
   },
+
   detailPage: async(req,res)=>{
     try {
       const { id } = req.params
@@ -29,13 +32,22 @@ module.exports = {
       .select('_id name status category thumbnail')
       .populate('nominals')
       .populate('category')
-      .populate('user', '_id name phoneNumber')
+      .populate('user', '_id name phoneNumber');
+
+      const payment = await Payment.find({
+        status: 'Y'
+      });
 
       if(!voucher){
         return res.status(404).json({ message: 'Voucher game not found.!' })
       }
 
-      res.status(200).json({ data: voucher })
+      res.status(200).json({ 
+        data: {
+          detail: voucher,
+          payment: payment
+        }
+      })
 
     } catch (err) {
       res.status(500).json({message: err.message || `Internal server error`})
