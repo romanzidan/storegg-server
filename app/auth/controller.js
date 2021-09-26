@@ -72,7 +72,7 @@ module.exports = {
           const token = jwt.sign({
             player: {
               id: player._id,
-              name: player.username,
+              name: player.name,
               email: player.email,
               username: player.username,
               phoneNumber: player.phoneNumber,
